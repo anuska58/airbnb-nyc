@@ -243,6 +243,16 @@ def clean_airbnb_data(input_file: Path, output_file: Path) -> pd.DataFrame:
     df = handle_missing_values(df)
     df = add_engineered_features(df)
 
+    if "minimum_nights" in df.columns:
+        df.loc[df["minimum_nights"] > 365, "minimum_nights"] = np.nan
+        df["minimum_nights"] = df["minimum_nights"].fillna(df["minimum_nights"].median())
+
+    if "license" in df.columns:
+        df = df.drop(columns=["license"])
+    
+    if "house_rules" in df.columns:
+        df = df.drop(columns=["house_rules"])
+
     df.to_csv(
         output_file,
         index=False,
