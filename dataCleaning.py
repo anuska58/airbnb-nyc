@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-INPUT_FILE = Path("Airbnb_Open_Data.csv")
+INPUT_FILE = Path("listings.csv")
 OUTPUT_FILE = Path("airbnb_cleaned.csv")
 
 
